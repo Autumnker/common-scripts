@@ -27,9 +27,11 @@ MAIN_BRANCHES=("main" "master")
 
 # Create the list of ignored parameters
 FIND_ARGS=()
-for dir in "${IGNORE_DIRS[@]}"; do
-    FIND_ARGS+=(-path "$(pwd)/$dir" -prune -o)
-done
+if [ "$IGNORE_DIRS" != "" ]; then
+    for dir in "${IGNORE_DIRS[@]}"; do
+        FIND_ARGS+=(-path "$(pwd)/$dir" -prune -o)
+    done
+fi
 
 # Create an array of repository directories
 mapfile -t repo_dirs < <(
